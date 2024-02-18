@@ -24,11 +24,12 @@ end
 
 local function write(chars)
   for i = 1, #chars do
-    if x > l then
+    local char = chars:sub(i, i)
+    if x > l or char == "\n" then
       nextLine()
     end
     term.setCursorPos(x, y)
-    term.write(chars:sub(i, i))
+    term.write(char)
     x = x + 1
   end
 end
@@ -56,6 +57,10 @@ function earlyLogger.info(message)
 end
 function earlyLogger.warn(message)
   termShow(colors.yellow, "WARN", message)
+  recordMessage(WARN_LEVEL, message)
+end
+function earlyLogger.error(message)
+  termShow(colors.red, "ERROR", message)
   recordMessage(WARN_LEVEL, message)
 end
 
