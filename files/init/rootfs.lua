@@ -43,6 +43,9 @@ end
 function rootFsNodePrototype:delete()
   self.backing.delete(self.path)
 end
+function rootFsNodePrototype:open(name, mode)
+  return io.open(self.path .. "/" .. name, mode)
+end
 
 local function formatRootFs(_)
   -- TODO: Look at parameter
